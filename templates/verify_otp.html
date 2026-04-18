@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Verify OTP</title>
+
+<style>
+body {
+    background: #f7f3ef;
+    font-family: 'Segoe UI';
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.box {
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    text-align:center;
+    width:300px;
+}
+
+input {
+    padding:10px;
+    width:100%;
+    margin-top:10px;
+}
+
+button {
+    margin-top:10px;
+    padding:10px;
+    width:100%;
+}
+
+.resend {
+    margin-top:10px;
+    color:blue;
+    cursor:pointer;
+}
+
+.timer {
+    margin-top:10px;
+    color:red;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Verify OTP</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="otp" placeholder="Enter OTP">
+        <button>Verify</button>
+    </form>
+
+    <!-- TIMER -->
+    <div class="timer" id="timer">60 sec</div>
+
+    <!-- RESEND -->
+    <a href="/resend_otp/" class="resend">Resend OTP</a>
+
+    {% if error %}
+        <p style="color:red">{{ error }}</p>
+    {% endif %}
+</div>
+
+<script>
+let time = 60;
+let timer = document.getElementById("timer");
+
+let countdown = setInterval(() => {
+    time--;
+    timer.innerHTML = time + " sec";
+
+    if(time <= 0){
+        clearInterval(countdown);
+        timer.innerHTML = "OTP Expired";
+    }
+}, 1000);
+</script>
+
+</body>
+</html>

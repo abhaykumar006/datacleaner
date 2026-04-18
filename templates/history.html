@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>History</title>
+
+<style>
+body {
+    font-family: 'Segoe UI';
+    background: #f7f3ef;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Your Cleaning History</h2>
+
+    {% for file in files %}
+        <div class="card">
+            <b>{{ file.filename }}</b><br>
+            Accuracy: {{ file.accuracy }}%<br>
+            Date: {{ file.uploaded_at }}
+        </div>
+    {% empty %}
+        <p>No history found</p>
+    {% endfor %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DataCleaner Output</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f7f3ef;
+}
+
+/* HEADER */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+
+.back {
+    padding: 8px 15px;
+    border-radius: 10px;
+    background: #f0e6dc;
+    text-decoration: none;
+}
+
+/* TITLE */
+.center {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.title {
+    font-size: 38px;
+    font-weight: bold;
+}
+
+/* SUMMARY */
+.summary {
+    width: 80%;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 15px;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+    animation: fadeUp 0.8s ease;
+}
+
+.box {
+    text-align: center;
+}
+
+.box h3 {
+    margin: 0;
+    color: #888;
+}
+
+.box p {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* TABLE */
+.table-container {
+    width: 90%;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+    animation: fadeUp 1s ease;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* BUTTON */
+.btn-center {
+    text-align: center;
+    margin: 40px;
+}
+
+.download {
+    padding: 14px 30px;
+    background: linear-gradient(45deg,#00c853,#009688);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+
+    animation: pulse 1.5s infinite;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0,200,150,0.5); }
+    70% { box-shadow: 0 0 0 10px rgba(0,200,150,0); }
+    100% { box-shadow: 0 0 0 0 rgba(0,200,150,0); }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="topbar">
+    <a href="/" class="back">⬅ Back to Home</a>
+    <div>{{ filename }}</div>
+</div>
+
+<!-- TITLE -->
+<div class="center">
+    <h1 class="title">Cleaned Data Report</h1>
+</div>
+
+<!-- SUMMARY -->
+<div class="summary">
+    <div class="box">
+        <h3>File Name</h3>
+        <p>{{ filename }}</p>
+    </div>
+
+    <div class="box">
+        <h3>Accuracy</h3>
+        <p>{{ accuracy }}%</p>
+    </div>
+
+    <div class="box">
+        <h3>Status</h3>
+        <p>Cleaned ✅</p>
+    </div>
+</div>
+
+<!-- TABLE -->
+<div class="table-container">
+    <h3>Preview of Cleaned Data</h3>
+    {{ table|safe }}
+</div>
+
+<!-- DOWNLOAD -->
+<div class="btn-center">
+    <a href="/download/">
+        <button class="download">⬇ Download Cleaned File</button>
+    </a>
+</div>
+
+</body>
+</html>

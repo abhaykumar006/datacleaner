@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DataCleaner Pro</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #ffffff;   /* clean white */
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #00c6ff;
+}
+
+.nav-center a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #444;
+}
+
+.nav-right button {
+    margin-left: 10px;
+    padding: 8px 18px;
+    border-radius: 8px;
+    border: none;
+}
+
+.signup {
+    background: linear-gradient(45deg,#7b2ff7,#2575fc);
+    color: white;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background: #f7f3ef;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #00c6ff;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-right a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+/* BUTTONS */
+.login {
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.signup {
+    background: linear-gradient(45deg,#7b2ff7,#2575fc);
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+}
+
+/* DROPDOWN */
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    background: #eee;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    min-width: 160px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    color: #333;
+}
+
+.dropdown-content a:hover {
+    background: #f2f2f2;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/* HERO */
+.hero {
+    text-align: center;
+    padding-top: 80px;
+}
+
+.tag {
+    padding: 8px 20px;
+    border-radius: 20px;
+    background: none;   /* REMOVE background */
+    color: #00c6ff;     /* sky blue */
+    font-weight: 500;
+}
+
+.hero h1 {
+    font-size: 90px;
+    font-weight: 900;
+}
+
+.gradient {
+    background: linear-gradient(90deg,#00c6ff,#7b2ff7);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.desc {
+    max-width: 650px;
+    margin: auto;
+    color: #666;
+}
+
+.btns {
+    margin-top: 30px;
+}
+
+.start {
+    padding: 14px 30px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(45deg,#7b2ff7,#2575fc);
+    color: white;
+}
+
+.explore {
+    padding: 14px 30px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    background: #f2ebe5;
+}
+
+/* FEATURES */
+#features {
+    padding: 60px 100px;
+}
+
+.feature-title {
+    font-size: 34px;
+    background: linear-gradient(90deg,#00c6ff,#7b2ff7);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.feature-row {
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.card {
+    width: 280px;
+    padding: 20px;
+    border-radius: 15px;
+    background: white;
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.center-card {
+    display: flex;
+    justify-content: center;
+}
+
+.special {
+    border: 2px solid purple;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-right a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.login {
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+}
+
+.signup {
+    background: linear-gradient(45deg,#7b2ff7,#2575fc);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+}
+/* ANIMATION */
+.animate {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp 0.8s forwards;
+}
+
+.delay1 { animation-delay: 0.2s; }
+.delay2 { animation-delay: 0.4s; }
+.delay3 { animation-delay: 0.6s; }
+.delay4 { animation-delay: 0.8s; }
+
+@keyframes fadeUp {
+    to { opacity:1; transform:translateY(0); }
+}
+
+/* ANALYTICS */
+.section {
+    padding: 60px;
+}
+
+.left {
+    text-align: left;
+    margin-left: 80px;
+}
+
+.analytics {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.box {
+    width: 300px;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+}
+
+/* FEATURE GRID */
+.feature-grid {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.mini {
+    width: 200px;
+    padding: 15px;
+    border-radius: 12px;
+    background: white;
+}
+
+/* UPLOAD */
+.upload-box {
+    width: 600px;
+    margin: auto;
+    padding: 50px;
+    border: 2px dashed #00c6ff;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.btn-center {
+    display: flex;
+    justify-content: center;
+}
+
+.clean-btn {
+    background: linear-gradient(45deg,#7b2ff7,#2575fc);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 10px;
+    border: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<!-- NAVBAR -->
+<div class="navbar">
+
+    <!-- LOGO -->
+    <div class="logo">DataCleaner Pro</div>
+
+    <!-- RIGHT SIDE -->
+    <div class="nav-right">
+
+        <a href="#features">Features</a>
+        <a href="/history/">History</a>
+
+       
+
+        <!-- 🔥 DROPDOWN -->
+        <div class="dropdown">
+            <button class="dropbtn">👤 {{ user.username }}</button>
+
+            <div class="dropdown-content">
+                <a href="/history/">My History</a>
+                <a href="/logout/">Logout</a>
+            </div>
+        </div>
+
+        
+
+        <!-- LOGIN SIGNUP -->
+        <a href="/login/">
+            <button class="login">Login</button>
+        </a>
+
+        <a href="/signup/">
+            <button class="signup">Sign Up</button>
+        </a>
+
+        
+
+    </div>
+
+</div>
+<!-- HERO -->
+<div class="hero">
+<div class="tag">AI-Powered Data Cleaning Engine</div>
+
+<h1>Your Data,<br><span class="gradient">Perfectly Clean.</span></h1>
+
+<p class="desc">
+DataCleaner Pro uses intelligent algorithms to detect and fix errors across structured data, text, numbers, dates, and multimedia.
+</p>
+
+<div class="btns">
+<button class="start">Start Cleaning</button>
+<button class="explore">Explore Features</button>
+</div>
+</div>
+
+
+<!-- FEATURES -->
+<div id="features">
+<h2 class="feature-title">Five Cleaning Modules</h2>
+
+<div class="feature-row">
+<div class="card animate">Structured Data Cleaning</div>
+<div class="card animate delay1">Text Data Cleaning</div>
+</div>
+
+<div class="feature-row">
+<div class="card animate delay2">Numerical Cleaning</div>
+<div class="card animate delay3">Date Cleaning</div>
+</div>
+
+<div class="center-card">
+<div class="card animate delay4 special">Image Cleaning</div>
+</div>
+</div>
+
+<!-- ANALYTICS -->
+<div class="section">
+<h2 class="left">Data Cleaning at Scale</h2>
+
+<div class="analytics">
+<div class="box"><canvas id="pieChart"></canvas></div>
+<div class="box"><canvas id="barChart"></canvas></div>
+<div class="box"><canvas id="lineChart"></canvas></div>
+</div>
+</div>
+
+<!-- START -->
+<div class="section">
+<h2 class="left">Choose a Feature & Upload</h2>
+
+<div class="feature-grid">
+<div class="mini">CSV, Excel</div>
+<div class="mini">PDF, DOCX</div>
+<div class="mini">Numerical</div>
+<div class="mini">Date</div>
+<div class="mini">Image</div>
+</div>
+
+<form method="POST" action="/upload/" enctype="multipart/form-data">
+
+
+<div class="upload-box">
+<h3>Drop your file here</h3>
+<input type="file" name="file" required>
+</div>
+
+<div class="btn-center">
+<button class="clean-btn">Clean Data</button>
+</div>
+</form>
+</div>
+
+<script>
+new Chart(document.getElementById('pieChart'), {
+type:'doughnut',
+data:{labels:['Missing','Duplicate'],datasets:[{data:[40,60]}]}
+});
+
+
+document.querySelector('a[href="#features"]').addEventListener("click", function(e) {
+    e.preventDefault();
+    document.getElementById("features").scrollIntoView({
+        behavior: "smooth"
+    });
+});
+
+
+new Chart(document.getElementById('barChart'), {
+type:'bar',
+data:{labels:['Oct','Nov'],datasets:[{data:[1000,2000]}]}
+});
+
+new Chart(document.getElementById('lineChart'), {
+type:'line',
+data:{labels:['Before','After'],datasets:[{data:[60,90]}]}
+});
+</script>
+
+</body>
+</html>
