@@ -1,0 +1,803 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>DataCleaner Pro</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#ffffff;
+    overflow-x:hidden;
+    color:#1e1e1e;
+}
+
+/* ================= CURSOR HIGHLIGHT ================= */
+
+.card,
+.mini,
+.box,
+.upload-box,
+button,
+.nav-right a,
+.hero,
+.section,
+.navbar{
+    transition:0.35s ease;
+}
+
+.card:hover,
+.mini:hover,
+.box:hover,
+.upload-box:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 45px rgba(0,0,0,0.08);
+    border:1px solid #7b2ff7;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.nav-right a:hover{
+    color:#7b2ff7;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 70px;
+    background:rgba(247,243,239,0.9);
+    backdrop-filter:blur(12px);
+    position:sticky;
+    top:0;
+    z-index:999;
+    border-bottom:1px solid #eee;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:800;
+    font-family:'Syne',sans-serif;
+    background:linear-gradient(90deg,#00c6ff,#7b2ff7);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.nav-right a{
+    text-decoration:none;
+    color:#333;
+    font-weight:600;
+}
+
+.login{
+    background:transparent;
+    border:1px solid #ccc;
+    padding:10px 18px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.signup{
+    background:linear-gradient(45deg,#7b2ff7,#2575fc);
+    color:white;
+    padding:10px 20px;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:115vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:100px 20px;
+    position:relative;
+}
+
+.hero::before{
+    content:'';
+    width:500px;
+    height:500px;
+    background:radial-gradient(circle,#00c6ff22,#7b2ff711);
+    position:absolute;
+    border-radius:50%;
+    top:-120px;
+    right:-100px;
+    z-index:-1;
+}
+
+.hero::after{
+    content:'';
+    width:450px;
+    height:450px;
+    background:radial-gradient(circle,#7b2ff722,#00c6ff11);
+    position:absolute;
+    border-radius:50%;
+    bottom:-150px;
+    left:-100px;
+    z-index:-1;
+}
+
+.tag{
+    color:#00c6ff;
+    font-weight:700;
+    margin-bottom:25px;
+    font-size:15px;
+    letter-spacing:1px;
+}
+
+.hero h1{
+    font-size:95px;
+    font-weight:900;
+    line-height:1;
+    font-family:'Syne',sans-serif;
+}
+
+.gradient{
+    background:linear-gradient(90deg,#00c6ff,#7b2ff7);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.desc{
+    max-width:850px;
+    margin-top:30px;
+    color:#666;
+    font-size:18px;
+    line-height:1.9;
+}
+
+.btns{
+    margin-top:40px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.start{
+    padding:16px 34px;
+    border-radius:14px;
+    border:none;
+    background:linear-gradient(45deg,#7b2ff7,#2575fc);
+    color:white;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.explore{
+    padding:16px 34px;
+    border-radius:14px;
+    border:1px solid #ddd;
+    background:#f2ebe5;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* ================= PROJECT DESCRIPTION ================= */
+
+.section{
+    padding:90px 100px;
+}
+
+.feature-title{
+    font-size:48px;
+    font-family:'Syne',sans-serif;
+    background:linear-gradient(90deg,#00c6ff,#7b2ff7);
+    -webkit-background-clip:text;
+    color:transparent;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.section-desc{
+    max-width:1000px;
+    margin:auto;
+    text-align:center;
+    color:#666;
+    line-height:2;
+    font-size:18px;
+}
+
+/* ================= FEATURES ================= */
+
+#features{
+    padding:80px 100px;
+}
+
+.feature-row{
+    display:flex;
+    justify-content:center;
+    gap:35px;
+    margin:35px 0;
+    flex-wrap:wrap;
+}
+
+.card{
+    width:320px;
+    padding:30px;
+    border-radius:20px;
+    background:white;
+    border:1px solid #eee;
+    cursor:pointer;
+}
+
+.card h3{
+    margin-bottom:18px;
+    font-size:24px;
+    font-family:'Syne',sans-serif;
+}
+
+.card p{
+    color:#666;
+    line-height:1.9;
+}
+
+.card.active{
+    border:2px solid #7b2ff7;
+    transform:scale(1.04);
+    font-weight:bold;
+    box-shadow:0 15px 40px rgba(123,47,247,0.15);
+}
+
+.special{
+    border:2px solid purple;
+}
+
+/* ================= ANIMATION ================= */
+
+.animate{
+    opacity:0;
+    transform:translateY(40px);
+    animation:fadeUp 0.8s forwards;
+}
+
+.delay1{ animation-delay:0.2s; }
+.delay2{ animation-delay:0.4s; }
+.delay3{ animation-delay:0.6s; }
+.delay4{ animation-delay:0.8s; }
+
+@keyframes fadeUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ================= ANALYTICS ================= */
+
+.left{
+    text-align:left;
+    margin-left:80px;
+    margin-bottom:40px;
+    font-size:42px;
+    font-family:'Syne',sans-serif;
+}
+
+.analytics{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.box{
+    width:340px;
+    padding:25px;
+    background:white;
+    border-radius:20px;
+    border:1px solid #eee;
+}
+
+/* ================= GRID ================= */
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:22px;
+    margin-top:40px;
+}
+
+.mini{
+    padding:20px;
+    border-radius:15px;
+    background:white;
+    border:1px solid #eee;
+    text-align:center;
+    font-weight:600;
+}
+
+/* ================= UPLOAD ================= */
+
+.upload-form{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:40px;
+}
+
+.upload-box{
+    width:700px;
+    max-width:95%;
+    padding:60px;
+    border:2px dashed #00c6ff;
+    border-radius:25px;
+    text-align:center;
+    background:white;
+}
+
+.upload-box h3{
+    margin-bottom:20px;
+    font-size:28px;
+    font-family:'Syne',sans-serif;
+}
+
+.upload-box p{
+    color:#666;
+    margin-bottom:20px;
+}
+
+.clean-btn{
+    background:linear-gradient(45deg,#7b2ff7,#2575fc);
+    color:white;
+    padding:15px 34px;
+    border-radius:12px;
+    border:none;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:700;
+}
+
+.btn-center{
+    margin-top:25px;
+}
+
+.file-name{
+    margin-top:18px;
+    color:#16a34a;
+    font-weight:700;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+    padding:50px;
+    text-align:center;
+    color:#777;
+    margin-top:40px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .hero h1{
+        font-size:60px;
+    }
+
+    .navbar{
+        padding:20px;
+    }
+
+    .section,
+    #features{
+        padding:70px 25px;
+    }
+
+    .left{
+        margin-left:0;
+        text-align:center;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        DataCleaner Pro
+    </div>
+
+    <div class="nav-right">
+
+        <a href="#features">Features</a>
+
+        <a href="/history/">History</a>
+
+        <div class="dropdown">
+            <button class="login">
+                👤 {{ user.username }}
+            </button>
+        </div>
+
+        <a href="/login/">
+            <button class="login">
+                Login
+            </button>
+        </a>
+
+        <a href="/signup/">
+            <button class="signup">
+                Sign Up
+            </button>
+        </a>
+
+    </div>
+
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+<div class="tag">
+AI-Powered Data Cleaning Engine
+</div>
+
+<h1>
+Your Data,<br>
+<span class="gradient">
+Perfectly Clean.
+</span>
+</h1>
+
+<p class="desc">
+
+DataCleaner Pro uses intelligent algorithms to detect and fix
+errors across structured data, text, numbers, dates,
+and multimedia. The platform preserves data integrity,
+improves quality, and automates preprocessing using AI-powered techniques.
+
+</p>
+
+<div class="btns">
+
+<button class="start"
+onclick="document.getElementById('upload-section').scrollIntoView({behavior:'smooth'})">
+Start Cleaning
+</button>
+
+<button class="explore"
+onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+Explore Features
+</button>
+
+</div>
+
+</div>
+
+<!-- PROJECT DESCRIPTION -->
+
+<div class="section">
+
+<h2 class="feature-title">
+About DataCleaner Pro
+</h2>
+
+<p class="section-desc">
+
+DataCleaner Pro is an AI-powered intelligent preprocessing platform
+designed to automate data cleaning across multiple domains including
+structured datasets, text documents, numerical records,
+date-time formats, and multimedia files.
+
+The system improves data integrity, consistency, completeness,
+and accuracy using advanced machine learning algorithms,
+statistical analysis, and rule-based validation techniques.
+
+</p>
+
+</div>
+
+<!-- FEATURES -->
+
+<div id="features">
+
+<h2 class="feature-title">
+Five Cleaning Modules
+</h2>
+
+<div class="feature-row">
+
+<div class="card animate">
+
+<h3>
+Structured Data Cleaning
+</h3>
+
+<p>
+Handles CSV, Excel, and SQL datasets by removing duplicates,
+fixing missing values, correcting invalid data types,
+and improving dataset consistency.
+</p>
+
+</div>
+
+<div class="card animate delay1">
+
+<h3>
+Text Data Cleaning
+</h3>
+
+<p>
+Cleans PDF, DOCX, and TXT files by correcting spelling,
+grammar, casing, whitespace,
+and formatting inconsistencies.
+</p>
+
+</div>
+
+</div>
+
+<div class="feature-row">
+
+<div class="card animate delay2">
+
+<h3>
+Numerical Cleaning
+</h3>
+
+<p>
+Detects outliers using IQR and Z-score methods,
+performs Random Forest imputation,
+and validates numerical consistency.
+</p>
+
+</div>
+
+<div class="card animate delay3">
+
+<h3>
+Date Cleaning
+</h3>
+
+<p>
+Standardizes date formats,
+detects invalid timestamps,
+and resolves timezone inconsistencies automatically.
+</p>
+
+</div>
+
+</div>
+
+<div class="feature-row">
+
+<div class="card animate delay4 special">
+
+<h3>
+Image Cleaning
+</h3>
+
+<p>
+Enhances blurry images,
+detects low-quality media,
+and improves multimedia clarity
+using AI enhancement techniques.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ANALYTICS -->
+
+<div class="section">
+
+<h2 class="left">
+Data Cleaning Analytics
+</h2>
+
+<div class="analytics">
+
+<div class="box">
+<canvas id="pieChart"></canvas>
+</div>
+
+<div class="box">
+<canvas id="barChart"></canvas>
+</div>
+
+<div class="box">
+<canvas id="lineChart"></canvas>
+</div>
+
+</div>
+
+</div>
+
+<!-- UPLOAD -->
+
+<div class="section" id="upload-section">
+
+<h2 class="left">
+Choose a Feature & Upload
+</h2>
+
+<div class="feature-grid">
+
+<div class="mini">CSV & Excel Cleaning</div>
+<div class="mini">PDF & DOCX Processing</div>
+<div class="mini">Numerical Analysis</div>
+<div class="mini">Date Validation</div>
+<div class="mini">Image Enhancement</div>
+
+</div>
+
+<form method="POST"
+      action="/upload/"
+      enctype="multipart/form-data"
+      class="upload-form">
+
+{% csrf_token %}
+
+<div class="upload-box">
+
+<h3>
+Drop your file here
+</h3>
+
+<p>
+Supported Formats:
+CSV, XLSX, PDF, DOCX, TXT, PNG, JPG, WEBP
+</p>
+
+<input type="file"
+       name="file"
+       id="fileInput"
+       required
+       onchange="showFileName(this)">
+
+<div class="file-name" id="fileName"></div>
+
+</div>
+
+<div class="btn-center">
+
+<button class="clean-btn" type="submit">
+Clean Data
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+© 2026 DataCleaner Pro — AI Powered Cleaning Platform
+</div>
+
+<script>
+
+/* ================= FILE NAME ================= */
+
+function showFileName(input){
+
+    if(input.files.length > 0){
+
+        document.getElementById("fileName").innerHTML =
+        "Selected File: " + input.files[0].name;
+    }
+}
+
+/* ================= CHARTS ================= */
+
+new Chart(document.getElementById('pieChart'), {
+
+type:'doughnut',
+
+data:{
+labels:['Missing','Duplicate','Outliers'],
+datasets:[{
+data:[40,35,25]
+}]
+}
+
+});
+
+new Chart(document.getElementById('barChart'), {
+
+type:'bar',
+
+data:{
+labels:['CSV','Text','Image','Date'],
+datasets:[{
+data:[1000,2000,1500,800]
+}]
+}
+
+});
+
+new Chart(document.getElementById('lineChart'), {
+
+type:'line',
+
+data:{
+labels:['Before','After'],
+datasets:[{
+data:[60,95],
+borderWidth:3,
+tension:0.4
+}]
+}
+
+});
+
+/* ================= FEATURE CLICK ================= */
+
+const cards = document.querySelectorAll('.card');
+
+cards.forEach(card => {
+
+card.addEventListener('click', () => {
+
+cards.forEach(c => c.classList.remove('active'));
+
+card.classList.add('active');
+
+});
+
+});
+
+/* ================= SMOOTH SCROLL ================= */
+
+document.querySelector('a[href="#features"]').addEventListener("click", function(e) {
+
+e.preventDefault();
+
+document.getElementById("features").scrollIntoView({
+behavior:"smooth"
+});
+
+});
+
+</script>
+
+</body>
+</html>

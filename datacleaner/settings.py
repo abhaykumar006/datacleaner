@@ -1,11 +1,13 @@
 from pathlib import Path
 import pytesseract
 import os
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+if os.name == "nt":
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-key'
-DEBUG = True
+SECRET_KEY = os.environ.get("SECRET_KEY")
+DEBUG = False
 
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['*']
@@ -23,6 +25,8 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 
     'django.middleware.csrf.CsrfViewMiddleware',   # ✅ add
     'django.contrib.auth.middleware.AuthenticationMiddleware',  # ✅ add
@@ -59,6 +63,7 @@ DATABASES = {
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
