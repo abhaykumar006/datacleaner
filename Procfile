@@ -1,1 +1,1 @@
-web: gunicorn datacleaner.wsgi:application
+web: gunicorn datacleaner.wsgi:application --workers 1 --timeout 120
